@@ -21,6 +21,8 @@ add_executable(AminDopingi main.cpp
         src/Game.h
         src/view/Background.cpp
         src/view/Background.h
+        src/view/BackgroundHills.cpp
+        src/view/BackgroundHills.h
 )
 target_link_libraries(AminDopingi
         Qt::Core
