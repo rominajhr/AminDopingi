@@ -20,6 +20,7 @@ public:
     void handleKeyRelease(QKeyEvent *event);
 
     float distanceTraveled; // field to track the distance traveled by the player
+    QTimer *movingTimer;
 
 signals:
     void moveBackgroundLeft(float speed);
@@ -51,7 +52,6 @@ private:
     bool isRightDirection;
 
     QTimer *gravityTimer;
-    QTimer *movingTimer;
 
 
 };
