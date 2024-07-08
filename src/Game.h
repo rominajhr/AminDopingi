@@ -3,6 +3,7 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include "view/Player.h"
 #include "view/Background.h"
 #include "view/BackgroundHills.h"
 #include "view/Platform.h"
