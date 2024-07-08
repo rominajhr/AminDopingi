@@ -23,6 +23,12 @@ add_executable(AminDopingi main.cpp
         src/view/Background.h
         src/view/BackgroundHills.cpp
         src/view/BackgroundHills.h
+        src/view/Position.cpp
+        src/view/Position.h
+        src/view/Platform.cpp
+        src/view/Platform.h
+        src/view/PlatformSmallTall.cpp
+        src/view/PlatformSmallTall.h
 )
 target_link_libraries(AminDopingi
         Qt::Core
