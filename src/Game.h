@@ -24,6 +24,9 @@ private:
 
     int amountDistance; 
 
+    void handleGameOver(); // New method
+    void handleVictory(); // New method
+
 public:
     Game();
 
@@ -33,6 +36,7 @@ protected:
 
 private slots:
     void moveBackgroundLeft(float speed);
+    void checkGameState(); // New slot
 
 };
 
