@@ -108,11 +108,13 @@ void Game::handleVictory() {
 void Game::checkGameState() {
     // Check if the player has fallen below the screen (game over condition)
     if (player->y() > height() - 300) {
+        player->movingTimer->stop();
         handleGameOver();
     }
 
     // Check if the player has traveled the specified distance (victory condition)
     if (player->distanceTraveled >= amountDistance) {
+        player->movingTimer->stop();
         handleVictory();
     }
 }
