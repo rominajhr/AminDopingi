@@ -64,4 +64,28 @@ Game::Game() {
     }
     scene->addItem(player);
     setScene(scene);
+
+    // Connect the player's signal to the slot for moving the background
+    connect(player, &Player::moveBackgroundLeft, this, &Game::moveBackgroundLeft);
+}
+
+void Game::moveBackgroundLeft(float speed) {
+    background->moveLeft(speed/2);
+    backgroundHills->moveLeft((speed*3)/4 ); // Move hills slower for parallax effect
+
+    // Move platforms
+    for (Platform* platform : platforms) {
+        platform->moveLeft(speed);
+    }
+    for (PlatformSmallTall* platformSmallTall : platformSmallTalls) {
+        platformSmallTall->moveLeft(speed);
+    }
+}
+
+void Game::keyPressEvent(QKeyEvent *event) {
+    player->handleMovement(event);
+}
+
+void Game::keyReleaseEvent(QKeyEvent *event) {
+    player->handleKeyRelease(event);
 }
