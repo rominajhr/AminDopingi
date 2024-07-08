@@ -54,6 +54,14 @@ Game::Game() {
         scene->addItem(platform);
         initialX += platform->pixmap().width() + platformSpacing;
     }
-    
+        amountDistance = 10000;
+
+    // Create and add the player to the scene
+    player = new Player(width(), height());
+    if (!platforms.empty()) {
+        Platform *firstPlatform = platforms.front();
+        player->setPos(firstPlatform->x(), firstPlatform->y() - player->pixmap().height());
+    }
+    scene->addItem(player);
     setScene(scene);
 }
