@@ -11,8 +11,11 @@
 
 
 class Game : public QGraphicsView {
+Q_OBJECT
+
 private:
     QGraphicsScene *scene;
+    Player *player;
     std::vector<Platform*> platforms;
     std::vector<PlatformSmallTall*> platformSmallTalls;
     Background *background;
