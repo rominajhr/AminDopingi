@@ -19,6 +19,7 @@ find_package(Qt6 COMPONENTS
 add_executable(AminDopingi main.cpp
         src/Game.cpp
         src/Game.h
+        resources.qrc
         src/view/Background.cpp
         src/view/Background.h
         src/view/BackgroundHills.cpp
@@ -29,6 +30,8 @@ add_executable(AminDopingi main.cpp
         src/view/Platform.h
         src/view/PlatformSmallTall.cpp
         src/view/PlatformSmallTall.h
+        src/view/Player.cpp
+        src/view/Player.h
 )
 target_link_libraries(AminDopingi
         Qt::Core
