@@ -21,3 +21,18 @@ Player::Player(int SceneWidth, int SceneHeight, QGraphicsItem *parent)
     setPos(position.x, position.y);
 
 }
+
+bool Player::isOnPlatform() {
+    QList<QGraphicsItem*> collidingItems1 = scene()->collidingItems(this);
+    for (QGraphicsItem* item : collidingItems1) {
+        Platform* platform = dynamic_cast<Platform*>(item);
+        if (platform) {
+            // Check if the player is on top of the platform
+            if (position.x + pixmap().width() > platform->x() && position.x < platform->x() + platform->pixmap().width()) {
+                position.y = platform->y() - pixmap().height();
+                return true;
+            }
+        }
+    }
+    return false;
+}
