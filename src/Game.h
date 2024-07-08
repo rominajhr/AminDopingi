@@ -22,8 +22,18 @@ private:
     Background *background;
     BackgroundHills *backgroundHills;
 
+    int amountDistance; 
+
 public:
     Game();
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
+private slots:
+    void moveBackgroundLeft(float speed);
+
 };
 
 #endif
