@@ -40,6 +40,13 @@ Game::Game() {
         platforms.push_back(platform);
         scene->addItem(platform);
 
+        //add a small tall platform
+        PlatformSmallTall *platformSmallTall = new PlatformSmallTall(width(), height());
+        platformSmallTall->setPos(initialX+ (platform->pixmap().width())/5, height() - platformSmallTall->pixmap().height()-platform->pixmap().height());
+        platformSmallTalls.push_back(platformSmallTall);
+        scene->addItem(platformSmallTall);
+        initialX += platform->pixmap().width() + platformSpacing;
+        
         //add another platform
         platform = new Platform(width(), height());
         platform->setPos(initialX, height() - platform->pixmap().height());
