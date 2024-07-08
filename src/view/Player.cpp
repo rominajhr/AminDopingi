@@ -36,3 +36,19 @@ bool Player::isOnPlatform() {
     }
     return false;
 }
+
+bool Player::isOnPlatformSmallTall() {
+    QList<QGraphicsItem*> collidingItems2 = scene()->collidingItems(this);
+    for (QGraphicsItem* item : collidingItems2) {
+        PlatformSmallTall* platformSmallTall = dynamic_cast<PlatformSmallTall*>(item);
+        if (platformSmallTall) {
+            // Check if the player is on top of the small or tall platform
+            if (position.x + pixmap().width() - 10 > platformSmallTall->x() && position.x < platformSmallTall->x() + platformSmallTall->pixmap().width() + 10 &&
+                    position.y + pixmap().height() - GROUND_TOLERANCE - platformSmallTall->pixmap().height()/3 <= platformSmallTall->y()) {
+                position.y = platformSmallTall->y() - pixmap().height();
+                return true;
+            }
+        }
+    }
+    return false;
+}
