@@ -1,5 +1,6 @@
 #include "Game.h"
-
+#include <QMessageBox>
+#include <QTimer>
 
 Game::Game() {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -88,4 +89,25 @@ void Game::keyPressEvent(QKeyEvent *event) {
 
 void Game::keyReleaseEvent(QKeyEvent *event) {
     player->handleKeyRelease(event);
+}
+
+void Game::handleGameOver() {
+    QMessageBox::information(this, "Game Over", "You died.Game Over.");
+    close(); // Quit the game
+}
+
+void Game::handleVictory() {
+    QMessageBox::information(this, "Victory", "Congratulations! You won the game.");
+    close(); // Quit the game
+}
+void Game::checkGameState() {
+    // Check if the player has fallen below the screen (game over condition)
+    if (player->y() > height() - 300) {
+        handleGameOver();
+    }
+
+    // Check if the player has traveled the specified distance (victory condition)
+    if (player->distanceTraveled >= amountDistance) {
+        handleVictory();
+    }
 }
