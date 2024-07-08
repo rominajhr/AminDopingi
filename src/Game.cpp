@@ -11,6 +11,8 @@ Game::Game() {
 
     background = new Background(width(), height());
     scene->addItem(background);
+    backgroundHills = new BackgroundHills(width(), height());
+    scene->addItem(backgroundHills);
 
     
     setScene(scene);
