@@ -15,6 +15,7 @@ public:
 
 private:
     bool isOnPlatform();
+    bool isOnPlatformSmallTall();
     Position position;
 
     int sceneWidth;
