@@ -2,7 +2,11 @@
 #include "Platform.h"
 #include "PlatformSmallTall.h"
 #include <QGraphicsScene>
+#include <QTimer>
 
+
+const float GRAVITY = 980.0; // Gravity constant (in pixels per second squared)
+const float TIME_STEP = 0.016; // Time step for simulation (60 FPS)
 const float MOVE_SPEED = 30.0; // Movement speed (in pixels per frame)
 const float JUMP_SPEED = 700.0; // Jump speed (in pixels per second)
 const float GROUND_TOLERANCE = 1.0; // Tolerance for ground check
@@ -27,6 +31,29 @@ Player::Player(int SceneWidth, int SceneHeight, QGraphicsItem *parent)
     velocity.x = 0;
     velocity.y = 0;
 
+                
+    // Set up a timer to handle gravity and movement updates
+    gravityTimer = new QTimer();
+    connect(gravityTimer, &QTimer::timeout, this, &Player::handleGravity);
+    gravityTimer->start(TIME_STEP * 1000); // Convert TIME_STEP to milliseconds
+
+}
+
+void Player::handleGravity() {
+    // Check for collision with platforms
+    if (!movingUp && ( isOnPlatformSmallTall()||isOnPlatform() ) ) {
+        velocity.y = 0; // Reset velocity when hitting a platform
+    } else {
+        // Update the vertical velocity based on gravity
+        velocity.y += GRAVITY * TIME_STEP;
+
+        // Update the position based on the new velocity
+        position.y += velocity.y * TIME_STEP;
+    }
+
+
+    // Update the player's position in the scene
+    setPos(position.x, position.y);
 }
 
 bool Player::isOnPlatform() {
