@@ -65,7 +65,7 @@ void Player::handleRightMovement() {
     movingRight = true;
     movingLeft = false;
     isRightDirection = true; // Set direction to right
-    
+   updateSprite();
 }
 
 void Player::handleLeftMovement() {
@@ -74,6 +74,7 @@ void Player::handleLeftMovement() {
     movingRight = false;
     movingLeft = true;
     isRightDirection = false; // Set direction to left
+    updateSprite();
     
 }
 
@@ -81,4 +82,31 @@ void Player::handleUpMovement() {
     // Implement up movement logic
     movingUp = true;
     velocity.y = -JUMP_SPEED; // Jumping up
+   
+}
+
+
+void Player::updateSprite() {
+    // Implement sprite update logic based on current frame
+    if (movingRight) {
+        // Update sprite to run right
+        QPixmap frame = spriteRunRight.copy(currentFrame * spriteRunRight.width() / 30, 0, spriteRunRight.width() / 30, spriteRunRight.height());
+        setPixmap(frame.scaled(193.076, 225.9));
+    } else if (movingLeft) {
+        // Update sprite to run left
+        QPixmap frame = spriteRunLeft.copy(currentFrame * spriteRunLeft.width() / 30, 0, spriteRunLeft.width() / 30, spriteRunLeft.height());
+        setPixmap(frame.scaled(193.076, 225.9));
+    } else {
+        // Update sprite to stand still with animation
+        if (isRightDirection) {
+            QPixmap frame = spriteStandRight.copy(currentFrame * spriteStandRight.width() / 60, 0, spriteStandRight.width() / 60, spriteStandRight.height());
+            setPixmap(frame.scaled(100, 225.9));
+        } else {
+            QPixmap frame = spriteStandLeft.copy(currentFrame * spriteStandLeft.width() / 60, 0, spriteStandLeft.width() / 60, spriteStandLeft.height());
+            setPixmap(frame.scaled(100, 225.9));
+        }
+    }
+
+    // Update frame for next animation step
+    currentFrame = (currentFrame + 1) % 30;
 }
