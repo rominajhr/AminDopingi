@@ -12,6 +12,10 @@ Q_OBJECT
 public:
     Player(int SceneWidth, int SceneHeight, QGraphicsItem *parent = nullptr);
 
+    void handleRightMovement();
+    void handleLeftMovement();
+    void handleUpMovement();
+
     float distanceTraveled; // field to track the distance traveled by the player
 
 
