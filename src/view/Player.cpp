@@ -3,6 +3,7 @@
 #include "PlatformSmallTall.h"
 #include <QGraphicsScene>
 #include <QTimer>
+#include <QKeyEvent>
 
 
 const float GRAVITY = 980.0; // Gravity constant (in pixels per second squared)
@@ -36,6 +37,12 @@ Player::Player(int SceneWidth, int SceneHeight, QGraphicsItem *parent)
     gravityTimer = new QTimer();
     connect(gravityTimer, &QTimer::timeout, this, &Player::handleGravity);
     gravityTimer->start(TIME_STEP * 1000); // Convert TIME_STEP to milliseconds
+
+    // Set up a timer to handle sprite animation updates
+    movingTimer = new QTimer();
+    movingTimer->setInterval(100);
+    connect(movingTimer , &QTimer::timeout , this , &Player::handleHorizon);
+    movingTimer->start();
 
 }
 
@@ -112,6 +119,29 @@ void Player::handleUpMovement() {
    
 }
 
+void Player::handleMovement(QKeyEvent *event) {
+    // Implement movement handling based on key press
+    if (event->key() == Qt::Key_Right) {
+        handleRightMovement();
+    } else if (event->key() == Qt::Key_Left) {
+        handleLeftMovement();
+    } else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Space) {
+        handleUpMovement();
+    }
+}
+void Player::handleKeyRelease(QKeyEvent *event) {
+    // Implement sprite update based on key release
+    if (event->key() == Qt::Key_Right) {
+        movingRight = false;
+    } else if (event->key() == Qt::Key_Left) {
+        movingLeft = false;
+    } else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Space) {
+        movingUp = false;
+    }
+
+    updateSprite(); // Call updateSprite to update the sprite based on the current
+}
+
 
 void Player::updateSprite() {
     // Implement sprite update logic based on current frame
@@ -137,3 +167,28 @@ void Player::updateSprite() {
     // Update frame for next animation step
     currentFrame = (currentFrame + 1) % 30;
 }
+
+
+void Player::handleHorizon() {
+    if (movingRight) {
+        if (position.x > sceneWidth / 2) {
+            distanceTraveled += MOVE_SPEED;
+            emit moveBackgroundLeft(MOVE_SPEED);
+        } else {
+            position.x += MOVE_SPEED;
+            distanceTraveled += MOVE_SPEED;
+        }
+    }
+    if (movingLeft && position.x > 0) {
+        position.x -= MOVE_SPEED;
+    }
+
+    // Ensure the player stays on the platform during horizontal movement
+
+    if (!movingUp && ( isOnPlatformSmallTall()||isOnPlatform() )) {
+        velocity.y = 0;
+    }
+
+    updateSprite();
+}
+
