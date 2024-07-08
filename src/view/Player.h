@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QTimer>
+#include <QKeyEvent>
 #include "Position.h"
 
 class Player : public QObject, public QGraphicsPixmapItem {
@@ -15,13 +16,17 @@ public:
     void handleRightMovement();
     void handleLeftMovement();
     void handleUpMovement();
+    void handleMovement(QKeyEvent *event);
+    void handleKeyRelease(QKeyEvent *event);
 
     float distanceTraveled; // field to track the distance traveled by the player
 
-
+signals:
+    void moveBackgroundLeft(float speed);
 
 public slots:
     void handleGravity();
+    void handleHorizon();
     void updateSprite();
 
 
