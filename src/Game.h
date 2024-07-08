@@ -3,10 +3,13 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include "view/Background.h"
 
 
 class Game : public QGraphicsView {
-
+private:
+    QGraphicsScene *scene;
+    Background *background;
 
 public:
     Game();
