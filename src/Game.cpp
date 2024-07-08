@@ -68,6 +68,11 @@ Game::Game() {
 
     // Connect the player's signal to the slot for moving the background
     connect(player, &Player::moveBackgroundLeft, this, &Game::moveBackgroundLeft);
+
+    // Set up a timer to check the game state periodically
+    QTimer *gameStateTimer = new QTimer(this);
+    connect(gameStateTimer, &QTimer::timeout, this, &Game::checkGameState);
+    gameStateTimer->start(100); // Check game state every 100 ms
 }
 
 void Game::moveBackgroundLeft(float speed) {
