@@ -1,6 +1,6 @@
 # AminDopingi Qtc++ Game 
 
-![Game Screenshot] (https://github.com/rominajhr/AminDopingi/blob/master/resources/images/Screenshot.png)
+![Screenshot.png] (https://github.com/rominajhr/AminDopingi/blob/master/resources/images/Screenshot.png)
 
 ## Overview 
 
