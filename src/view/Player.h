@@ -14,6 +14,7 @@ public:
 
 
 private:
+    bool isOnPlatform();
     Position position;
 
     int sceneWidth;
