@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include <QGraphicsPixmapItem>
+#include <QObject>
+#include <QTimer>
 #include "Position.h"
 
 class Player : public QObject, public QGraphicsPixmapItem {
@@ -13,10 +15,17 @@ public:
     float distanceTraveled; // field to track the distance traveled by the player
 
 
+
+public slots:
+    void handleGravity();
+
+
+
 private:
     bool isOnPlatform();
     bool isOnPlatformSmallTall();
     Position position;
+    Position velocity;
 
     int sceneWidth;
     int sceneHeight;
@@ -30,6 +39,8 @@ private:
     bool movingRight;
     bool movingLeft;
     bool isRightDirection;
+
+    QTimer *gravityTimer;
 
 
 };
