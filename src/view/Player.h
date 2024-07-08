@@ -46,6 +46,7 @@ private:
     bool isRightDirection;
 
     QTimer *gravityTimer;
+    QTimer *movingTimer;
 
 
 };
