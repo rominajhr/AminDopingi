@@ -8,5 +8,10 @@ Game::Game() {
     showFullScreen();
       scene = new QGraphicsScene(this);
     scene->setSceneRect(0, 0, width(), height());
+
+    background = new Background(width(), height());
+    scene->addItem(background);
+
+    
     setScene(scene);
 }
