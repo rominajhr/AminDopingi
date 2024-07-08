@@ -22,7 +22,7 @@ public:
 
 public slots:
     void handleGravity();
-
+    void updateSprite();
 
 
 private:
@@ -38,6 +38,7 @@ private:
     QPixmap spriteRunRight;
     QPixmap spriteStandLeft;
     QPixmap spriteStandRight;
+    int currentFrame;
 
     bool movingUp;
     bool movingRight;
